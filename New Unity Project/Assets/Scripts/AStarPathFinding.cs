@@ -9,21 +9,20 @@ public class AStarPathFinding
     List<PathNode> GetAdjacent(PathNode currentNode)
     {
         List<PathNode> neighborsList = new List<PathNode>();
-        currentNode.position - 1;
         return neighborsList;
     }
 
-    private List<PathNode> FindPath(Vector2 startPos, Vector2 endPos)
-    {
-        for(int i = 0; i < map.Count; i++)
-        {
-            if(map[i].position == startPos)
-            {
-                PathNode startNode = map[i];
-                break;
-            }
-        }
-    }
+    //private List<PathNode> FindPath(Vector2 startPos, Vector2 endPos)
+    //{
+    //    for(int i = 0; i < map.Count; i++)
+    //    {
+    //        if(map[i].position == startPos)
+    //        {
+    //            PathNode startNode = map[i];
+    //            break;
+    //        }
+    //    }
+    //}
 }
 
 
