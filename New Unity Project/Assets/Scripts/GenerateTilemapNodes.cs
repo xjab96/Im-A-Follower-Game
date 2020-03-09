@@ -28,7 +28,7 @@ public class GenerateTilemapNodes : MonoBehaviour
         foreach (Vector3Int pos in floor.cellBounds.allPositionsWithin)
         {
             Vector3Int localPos = new Vector3Int(pos.x, pos.y, pos.z);
-            Vector3 worldPos = walls.CellToWorld(localPos);
+            Vector3 worldPos = floor.CellToWorld(localPos);
             PathNode pathNode = new PathNode(worldPos);
 
             if (floor.HasTile(localPos))
