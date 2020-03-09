@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AStarPathFinding : MonoBehaviour
 {
     private List<PathNode> map;
-    private Vector2Int mapDimensions;
-    private int mapMaxIdx;
     private List<PathNode> openList;
     private int currentNodeIdx = 0;
 
@@ -18,8 +17,8 @@ public class AStarPathFinding : MonoBehaviour
     {
         tileMapNodes = GenerateTilemapNodes.Instance;
         map = tileMapNodes.nodes;
-        mapDimensions = tileMapNodes.tileMapDimensions;
-        mapMaxIdx = (mapDimensions.x * mapDimensions.y) - 1; //Minus 1 as it is an idx that starts from 0
+
+        //GetNode();
     }
 
     List<int> GeneratePath(int start, int goal)
@@ -27,65 +26,40 @@ public class AStarPathFinding : MonoBehaviour
         return new List<int>();
     }
 
-    List<int> GetAdjacent(int idx)
+    public PathNode GetNode(Vector2 nodePos)
     {
-        List<int> validNeighborsIdx = new List<int>();
-        for (int i = 0; i < 4; i++)
-        {
-            switch(i)
-            {
-                case 0: //Up
-                    if((idx - mapDimensions.x > 0) && map[(idx - mapDimensions.x)].isTraversable)
-                    {
-                        validNeighborsIdx.Add(idx - mapDimensions.x);
-                        //Then left idx is also valid
-                        if(map[idx - 1].isTraversable)
-                        {
-                            validNeighborsIdx.Add(idx - 1);
-                            i++; //skip next
-                        }
-                    }
-                    break;
-
-                case 1: //Left
-                    if ((idx - 1 > 0) && map[(idx - 1)].isTraversable)
-                    {
-                        validNeighborsIdx.Add(idx - 1);
-                    }
-                    break;
-
-                case 2: //Down
-                    if(idx + mapDimensions.x < mapMaxIdx && map[idx + mapDimensions.x].isTraversable)
-                    {
-                        validNeighborsIdx.Add(idx + mapDimensions.x);
-                        //Then right idx is also valid
-                        if(map[idx + 1].isTraversable)
-                        {
-                            validNeighborsIdx.Add(idx + 1);
-                            i++; //skip next
-                        }
-                    }
-                    break;
-
-                case 3: //Right
-                    if(idx + 1 < mapMaxIdx && map[idx + 1].isTraversable)
-                    {
-                        validNeighborsIdx.Add(idx + 1);
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-        }
-        return validNeighborsIdx;
+        IEnumerable<PathNode> nodeQuery = 
+            from node in map
+            where node.position == nodePos
+            select node;
+        return nodeQuery.First();
     }
 
-    //private List<PathNode> FindPath(Vector2 startPos, Vector2 endPos)
+    List<int> GetAdjacent(int idx)
+    {
+        return new List<int>();
+    }
+
+    private int PositionToIndex(Vector2 pos)
+    {
+        for(int x = 0; x < pos.x; x++)
+        {
+            for (int y = 0; y < pos.x; y++)
+            {
+
+            }
+
+        }
+        return -1;
+    }
+
+
+
+    //private List<PathNode> FindPath(int startIdx, int endIdx)
     //{
-    //    for(int i = 0; i < map.Count; i++)
+    //    for (int i = 0; i < map.Count; i++)
     //    {
-    //        if(map[i].position == startPos)
+    //        if (map[i].position == startPos)
     //        {
     //            PathNode startNode = map[i];
     //            break;

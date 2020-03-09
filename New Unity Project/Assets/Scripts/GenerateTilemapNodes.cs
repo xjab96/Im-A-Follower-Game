@@ -66,6 +66,7 @@ public class GenerateTilemapNodes : MonoBehaviour
                     if (obstacles[i].HasTile(localPos) && worldPos == obWorldPos)
                     {
                         pathNode.isTraversable = false;
+                        break;
                     }
                 }
             }
