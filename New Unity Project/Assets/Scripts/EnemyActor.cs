@@ -17,7 +17,8 @@ public class EnemyActor : Actor
         {
             currentMapNode = currentPath[currentPath.Count - 1];
             currentPath.RemoveAt(currentPath.Count - 1);
-            transform.position = currentMapNode.position;
+
+            //transform.position = currentMapNode.position;
         }
     }
 

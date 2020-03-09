@@ -6,6 +6,7 @@ public class Actor : MonoBehaviour
 {
     private Vector2 position;
     protected float gridSize = 1;
+    protected float speed = 10;
 
     protected PathNode currentMapNode;
     protected AStarPathFinding pathFinder;
@@ -21,5 +22,13 @@ public class Actor : MonoBehaviour
     {
         position += direction * gridSize;
         this.transform.position = currentMapNode.position;
+    }
+
+    protected virtual void Update()
+    {
+        if ((Vector2)transform.position != currentMapNode.position)
+        {
+            transform.position = Vector2.Lerp(transform.position, currentMapNode.position, speed * Time.deltaTime);
+        }
     }
 }

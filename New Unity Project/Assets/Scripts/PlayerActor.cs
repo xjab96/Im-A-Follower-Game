@@ -23,12 +23,7 @@ public class PlayerActor : Actor
         base.Start();
         currentMapNode = pathFinder.GetNearestNode(new Vector2(-2, 0));
         transform.position = currentMapNode.position;
-
     }
-    void Update()
-    {
-    }
-
     public override void Move(Vector2 direction)
     {
         foreach(var i in pathFinder.GetAdjacent(currentMapNode))
@@ -36,7 +31,6 @@ public class PlayerActor : Actor
             if(currentMapNode.position + direction == i.position)
             {
                 currentMapNode = i;
-                transform.position = currentMapNode.position;
             }
         }
     }
