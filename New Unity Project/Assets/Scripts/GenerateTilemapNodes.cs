@@ -16,7 +16,8 @@ public class GenerateTilemapNodes : MonoBehaviour
     private List<Tilemap> obstacles;
 
     public List<PathNode> nodes = new List<PathNode>();
-    public Vector2Int tileMapDimensions;
+    public Vector2 TileSize = new Vector2(1,1);
+
 
     private void Awake()
     {
@@ -39,10 +40,6 @@ public class GenerateTilemapNodes : MonoBehaviour
     }
     private void GenerateNodes()
     {
-        //Get width & height
-        BoundsInt bounds = floor.cellBounds;
-        tileMapDimensions = new Vector2Int(bounds.xMax, bounds.yMax);
-
         /* We only need to find out if the floor is walkable and if its not obstructed. Therefore we simply iterate and build a map
          * Using the floor boundaries. If the coordinates match that of an obstacle we set the path node to be obstructed */
         foreach (Vector3Int pos in floor.cellBounds.allPositionsWithin)
