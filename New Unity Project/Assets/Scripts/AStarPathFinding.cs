@@ -5,7 +5,17 @@ using UnityEngine;
 public class AStarPathFinding
 {
     private List<PathNode> map;
+    private Vector2 mapDimensions;
     private List<PathNode> openList;
+
+    void start()
+    {
+        map = GameObject.FindObjectOfType<GenerateTilemapNodes>().nodes;
+        mapDimensions = GameObject.FindObjectOfType<GenerateTilemapNodes>().tileMapDimensions;
+    }
+
+
+
     List<PathNode> GetAdjacent(PathNode currentNode)
     {
         List<PathNode> neighborsList = new List<PathNode>();

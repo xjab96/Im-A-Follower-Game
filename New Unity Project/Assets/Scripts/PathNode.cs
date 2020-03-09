@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class PathNode
 {
-    public float g;
-    public float h;
-    public float f;
     public Vector2 position;
+
+    public bool isTraversable = false;
+
+    public float g = 0;
+    public float h = 0;
+    public float f = 0;
+
     public PathNode cameFromNode;
-    public bool isTraversable;
 
     public PathNode(Vector2 Position)
     {
