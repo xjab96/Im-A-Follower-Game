@@ -6,8 +6,7 @@ using UnityEngine;
 public class AStarPathFinding : MonoBehaviour
 {
     private List<PathNode> map;
-    private List<PathNode> openList;
-    private int currentNodeIdx = 0;
+
     private Vector2 tileSize;
 
     private GenerateTilemapNodes tileMapNodes;
@@ -17,27 +16,73 @@ public class AStarPathFinding : MonoBehaviour
         tileMapNodes = GenerateTilemapNodes.Instance;
         map = tileMapNodes.nodes;
         tileSize = tileMapNodes.TileSize;
-        List<PathNode> test = GetAdjacent(map[10]);
-        foreach(var i in test)
+        GeneratePath(map[10], map[24]);
+    }
+
+
+    public float FindH(PathNode node, PathNode goal)
+    {
+        return Mathf.Abs(node.position.x - goal.position.x) +
+                    Mathf.Abs(node.position.y - goal.position.y);
+    }
+
+    public List<PathNode> GeneratePath(PathNode start, PathNode goal)
+    {
+        List<PathNode> openList = new List<PathNode>();
+        List<PathNode> closedList = new List<PathNode>();
+
+        start.g = 0;
+        start.h = FindH(start, goal);
+        start.f = start.g + start.h;
+        openList.Add(start);
+
+        while(openList.Count != 0)
         {
-            Debug.Log(i.position);
+            PathNode current = openList[0];
+            foreach(var node in openList)
+            {
+                if (node.f < current.f)
+                    current = node;
+            }
+            if (current == goal)
+            {
+                return ReconstructPath(start, current);
+            }
+
+            openList.Remove(current);
+            closedList.Add(current);
+            foreach(var i in GetAdjacent(current))
+            {
+                if(!closedList.Contains(i))
+                {
+                    i.g = current.g + 1;
+                    i.h = FindH(i, goal);
+                    i.f = i.g + i.h;
+
+                    i.cameFromNode = current;
+                    if (!openList.Contains(i))
+                        openList.Add(i);
+                }
+            }
+
         }
-        //GetNode();
+        //Open set is empty but no path was found
+        return new List<PathNode>();
     }
 
-    List<int> GeneratePath(PathNode start, PathNode goal)
+    private List<PathNode> ReconstructPath(PathNode start, PathNode current)
     {
-        return new List<int>();
+        List<PathNode> Path = new List<PathNode>();
+        while(current != start)
+        {
+            Path.Add(current);
+            Debug.Log(current.position);
+            current = current.cameFromNode;
+        }
+        return Path;
     }
 
-    public PathNode GetNode(Vector2 nodePos)
-    {
-        IEnumerable<PathNode> nodeQuery = 
-            from node in map
-            where node.position == nodePos
-            select node;
-        return nodeQuery.First();
-    }
+
 
     private List<PathNode> GetAdjacent(PathNode currentNode)
     {
@@ -80,6 +125,17 @@ public class AStarPathFinding : MonoBehaviour
         }
         return validNeighbors;
     }
+
+    private PathNode GetNode(Vector2 nodePos)
+    {
+        IEnumerable<PathNode> nodeQuery =
+            from node in map
+            where node.position == nodePos
+            select node;
+        return nodeQuery.First();
+    }
+
+
 }
 
 

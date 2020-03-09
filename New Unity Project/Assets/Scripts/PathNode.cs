@@ -8,14 +8,19 @@ public class PathNode
 
     public bool isTraversable = false;
 
-    public float g = 0;
-    public float h = 0;
-    public float f = 0;
+    float zero = 0;
+
+    public float g;
+    public float h;
+    public float f;
 
     public PathNode cameFromNode;
 
     public PathNode(Vector2 Position)
     {
         this.position = Position;
+        g = 1 / zero;
+        h = 1 / zero;
+        f = 1 / zero;
     }
 }
