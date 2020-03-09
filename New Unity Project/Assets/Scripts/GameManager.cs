@@ -11,21 +11,25 @@ public class GameManager : MonoBehaviour
     private ProtagonistActor protagonist;
     private List<EnemyActor> enemies = new List<EnemyActor>();
 
-
-    private void Start()
+    private void Awake()
     {
-        if(_instance != null && _instance != this)
+        if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
         }
         else
         {
             _instance = this;
+            DontDestroyOnLoad(this);
         }
-
+    }
+    private void Start()
+    {
         player = GameObject.FindObjectOfType<PlayerActor>();
         protagonist = GameObject.FindObjectOfType<ProtagonistActor>();
         enemies.AddRange(GameObject.FindObjectsOfType<EnemyActor>());
+
+
     }
 
     private void Update()

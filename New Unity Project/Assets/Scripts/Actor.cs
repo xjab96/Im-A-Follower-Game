@@ -7,14 +7,6 @@ public class Actor : MonoBehaviour
     private Vector2 position;
     protected float gridSize = 1;
 
-    float f;
-    float g;
-    float h;
-    List<Vector2> openList = new List<Vector2>();
-    List<Vector2> closedList = new List<Vector2>();
-
-
-
     protected virtual void Start()
     {
 
