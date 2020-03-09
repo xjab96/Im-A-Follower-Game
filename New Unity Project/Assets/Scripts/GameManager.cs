@@ -42,6 +42,10 @@ public class GameManager : MonoBehaviour
         if(MoveInput())
         {
             //move protagonist && all enemies
+            foreach(var i in enemies)
+            {
+                i.Move();
+            }
         }
     }
 

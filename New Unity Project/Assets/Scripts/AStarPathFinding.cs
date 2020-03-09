@@ -16,6 +16,7 @@ public class AStarPathFinding : MonoBehaviour
         tileMapNodes = GenerateTilemapNodes.Instance;
         map = tileMapNodes.nodes;
         tileSize = tileMapNodes.TileSize;
+        PathNode test = GetNode(map[0].position);
         GeneratePath(map[10], map[24]);
     }
 
@@ -75,19 +76,29 @@ public class AStarPathFinding : MonoBehaviour
         List<PathNode> Path = new List<PathNode>();
         while(current != start)
         {
+            GameObject go = new GameObject();
+            LineRenderer lr = go.AddComponent<LineRenderer>();
+            lr.startColor = Color.red;
+            lr.endColor = Color.red;
+            lr.sortingOrder = 1000;
+            lr.startWidth = 0.15f;
+            lr.endWidth = 0.15f;
+
             Path.Add(current);
-            Debug.Log(current.position);
+            lr.SetPosition(0, current.position);
             current = current.cameFromNode;
+            lr.SetPosition(1, current.position);
         }
         return Path;
     }
 
 
 
-    private List<PathNode> GetAdjacent(PathNode currentNode)
+    public List<PathNode> GetAdjacent(PathNode currentNode)
     {
         List<PathNode> validNeighbors = new List<PathNode>();
 
+        //tilesize cannot exceed 10 or this function breaks
         Vector2 position = currentNode.position;
         Vector2 up = new Vector2(0, tileSize.y);
         Vector2 down = new Vector2(0, -tileSize.y);
@@ -135,6 +146,23 @@ public class AStarPathFinding : MonoBehaviour
         return nodeQuery.First();
     }
 
+    public PathNode GetNearestNode(Vector2 pos)
+    {
+        float modX = pos.x % tileSize.x;
+        float modY = pos.y % tileSize.y;
+        pos.x -= modX;
+        pos.y -= modY;
+
+        PathNode nearest = map[0];
+        foreach(var i in map)
+        {
+            if (Vector2.Distance(i.position, pos) < Vector2.Distance(nearest.position, pos))
+            {
+                nearest = i;
+            }
+        }
+        return nearest;
+    }
 
 }
 
