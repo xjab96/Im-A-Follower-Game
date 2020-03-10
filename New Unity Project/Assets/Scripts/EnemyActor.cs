@@ -22,10 +22,7 @@ public class EnemyActor : Actor
     protected override void Update()
     {
         base.Update();
-
-
     }
-
 
     public void Move()
     {
@@ -42,8 +39,8 @@ public class EnemyActor : Actor
             else
             {
                 currentPath = pathFinder.GeneratePath(currentMapNode, checkPointNodes[currentCheckPoint]);
+                Move();
             }
-
         }
         else
         {
@@ -53,12 +50,9 @@ public class EnemyActor : Actor
                 currentCheckPoint = 0;
             }
             currentPath = pathFinder.GeneratePath(currentMapNode, checkPointNodes[currentCheckPoint]);
+            Move();
         }
     }
-
-
-
-
 
     protected List<PathNode> FindCheckPointNodes()
     {
@@ -68,7 +62,5 @@ public class EnemyActor : Actor
         }
         return checkPointNodes;
     }
-
-
 }
 
