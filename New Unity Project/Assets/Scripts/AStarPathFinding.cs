@@ -126,7 +126,6 @@ public class AStarPathFinding : MonoBehaviour
             if (neighborNode.position != position && neighborNode.isTraversable)
                 validNeighbors.Add(neighborNode);
         }
-        Debug.Log("returned neighbors");
         return validNeighbors;
     }
 

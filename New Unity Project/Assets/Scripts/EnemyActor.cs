@@ -43,7 +43,6 @@ public class EnemyActor : Actor
                 {
                     Move();
                 }
-
             }
         }
         else
