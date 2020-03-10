@@ -39,7 +39,11 @@ public class EnemyActor : Actor
             else
             {
                 currentPath = pathFinder.GeneratePath(currentMapNode, checkPointNodes[currentCheckPoint]);
-                Move();
+                if(currentPath.Count != 0)
+                {
+                    Move();
+                }
+
             }
         }
         else
@@ -50,7 +54,11 @@ public class EnemyActor : Actor
                 currentCheckPoint = 0;
             }
             currentPath = pathFinder.GeneratePath(currentMapNode, checkPointNodes[currentCheckPoint]);
-            Move();
+            if(currentPath.Count != 0)
+            {
+                Move();
+            }
+
         }
     }
 

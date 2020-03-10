@@ -49,7 +49,14 @@ public class AStarPathFinding : MonoBehaviour
 
             openList.Remove(current);
             closedList.Add(current);
-            foreach(var i in GetAdjacent(current))
+
+            List<PathNode> neighbors = GetAdjacent(current);
+            if(neighbors.Count == 0)
+            {
+                //The piece is trapped so cant path
+                return neighbors;
+            }
+            foreach(var i in neighbors)
             {
                 if(!closedList.Contains(i))
                 {
@@ -119,6 +126,7 @@ public class AStarPathFinding : MonoBehaviour
             if (neighborNode.position != position && neighborNode.isTraversable)
                 validNeighbors.Add(neighborNode);
         }
+        Debug.Log("returned neighbors");
         return validNeighbors;
     }
 

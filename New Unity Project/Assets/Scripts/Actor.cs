@@ -20,7 +20,7 @@ public class Actor : MonoBehaviour
     protected virtual void Start()
     {
         pathFinder = GetComponent<AStarPathFinding>();
-        currentMapNode = pathFinder.GetNearestNode(new Vector2(-1, 0));
+        currentMapNode = pathFinder.GetNearestNode(new Vector2(-3, -4));
         transform.position = currentMapNode.position;
 
         startMovementTransform = transform;
