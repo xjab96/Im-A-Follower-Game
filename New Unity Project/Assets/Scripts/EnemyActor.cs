@@ -31,9 +31,19 @@ public class EnemyActor : Actor
     {
         if(currentPath.Count != 0)
         {
-            currentMapNode = currentPath[currentPath.Count - 1];
-            currentPath.RemoveAt(currentPath.Count - 1);
-            rotateOnMove();
+            if(currentPath[currentPath.Count - 1].isTraversable == true)
+            {
+                currentMapNode.isTraversable = true;
+                currentMapNode = currentPath[currentPath.Count - 1];
+                currentMapNode.isTraversable = false;
+                currentPath.RemoveAt(currentPath.Count - 1);
+                rotateOnMove();
+            }
+            else
+            {
+                currentPath = pathFinder.GeneratePath(currentMapNode, checkPointNodes[currentCheckPoint]);
+            }
+
         }
         else
         {

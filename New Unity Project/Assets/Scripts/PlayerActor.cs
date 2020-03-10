@@ -25,15 +25,19 @@ public class PlayerActor : Actor
         currentMapNode = pathFinder.GetNearestNode(new Vector2(-2, 0));
         transform.position = currentMapNode.position;
     }
-    public void Move(Vector2 direction)
+    public bool Move(Vector2 direction)
     {
         foreach(var i in pathFinder.GetAdjacent(currentMapNode))
         {
             if(currentMapNode.position + direction == i.position)
             {
+                currentMapNode.isTraversable = true;
                 currentMapNode = i;
+                currentMapNode.isTraversable = false;
                 rotateOnMove();
+                return true;
             }
         }
+        return false;
     }
 }

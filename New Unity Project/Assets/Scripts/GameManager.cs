@@ -52,14 +52,12 @@ public class GameManager : MonoBehaviour
     bool MoveInput()
     {
         if (Input.GetKeyDown("up") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown("down") || Input.GetKeyDown(KeyCode.S))
-        {
-            player.Move(new Vector2(0.0F, Input.GetAxisRaw("Vertical")));
-            return true;
+        { 
+            return player.Move(new Vector2(0.0F, Input.GetAxisRaw("Vertical")));
         }
         if (Input.GetKeyDown("left") || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown("right") || Input.GetKeyDown(KeyCode.D))
         {
-            player.Move(new Vector2(Input.GetAxisRaw("Horizontal"), 0.0F));
-            return true;
+            return player.Move(new Vector2(Input.GetAxisRaw("Horizontal"), 0.0F));
         }
         return false;
     }

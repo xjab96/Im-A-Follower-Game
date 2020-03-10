@@ -8,8 +8,6 @@ public class GenerateTilemapNodes : MonoBehaviour
     private static GenerateTilemapNodes _instance;
     public static GenerateTilemapNodes Instance { get { return _instance; } }
 
-
-
     [SerializeField]
     private Tilemap floor;
     [SerializeField]
@@ -17,7 +15,6 @@ public class GenerateTilemapNodes : MonoBehaviour
 
     public List<PathNode> nodes = new List<PathNode>();
     public Vector2 TileSize = new Vector2(1,1);
-
 
     private void Awake()
     {
@@ -31,13 +28,8 @@ public class GenerateTilemapNodes : MonoBehaviour
             DontDestroyOnLoad(this);
         }
         GenerateNodes();
-
     }
 
-    private void Start()
-    {
-
-    }
     private void GenerateNodes()
     {
         /* We only need to find out if the floor is walkable and if its not obstructed. Therefore we simply iterate and build a map

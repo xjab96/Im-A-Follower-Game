@@ -25,6 +25,7 @@ public class Actor : MonoBehaviour
 
         startMovementTransform = transform;
         startMovementRotation = sprite.transform.rotation;
+        currentMapNode.isTraversable = false;
     }
 
     protected virtual void Update()
