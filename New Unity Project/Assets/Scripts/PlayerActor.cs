@@ -32,9 +32,7 @@ public class PlayerActor : Actor
             if(currentMapNode.position + direction == i.position)
             {
                 currentMapNode = i;
-
                 rotateOnMove();
-
             }
         }
     }

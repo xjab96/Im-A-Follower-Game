@@ -4,12 +4,28 @@ using UnityEngine;
 
 public class EnemyActor : Actor
 {
-    List<PathNode> currentPath;
+    public List<Vector2> checkPointPositons = new List<Vector2>();
+    public List<PathNode> checkPointNodes = new List<PathNode>();
+
+    private int currentCheckPoint = 0;
+
+    public CheckPointTag checkPointTag = CheckPointTag.A;
+
+    private List<PathNode> currentPath;
     protected override void Start()
     {
         base.Start();
-        currentPath = pathFinder.GeneratePath(currentMapNode, pathFinder.GetNearestNode(new Vector2(3, 1)));
+        FindCheckPointNodes();
+        currentPath = pathFinder.GeneratePath(currentMapNode, checkPointNodes[currentCheckPoint]);
     }
+
+    protected override void Update()
+    {
+        base.Update();
+
+
+    }
+
 
     public void Move()
     {
@@ -19,16 +35,28 @@ public class EnemyActor : Actor
             currentPath.RemoveAt(currentPath.Count - 1);
             rotateOnMove();
         }
+        else
+        {
+            currentCheckPoint++;
+            if(currentCheckPoint == checkPointNodes.Count)
+            {
+                currentCheckPoint = 0;
+            }
+            currentPath = pathFinder.GeneratePath(currentMapNode, checkPointNodes[currentCheckPoint]);
+        }
     }
 
-    public List<PathNode> CheckPointNodes = new List<PathNode>();
 
-    public CheckPointTag checkPointTag = CheckPointTag.A;
+
+
 
     protected List<PathNode> FindCheckPointNodes()
     {
-
-        return CheckPointNodes;
+        for(int i = 0; i < checkPointPositons.Count; i++)
+        {
+            checkPointNodes.Add(pathFinder.GetNearestNode(checkPointPositons[i]));
+        }
+        return checkPointNodes;
     }
 
 
