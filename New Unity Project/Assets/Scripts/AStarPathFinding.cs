@@ -16,10 +16,7 @@ public class AStarPathFinding : MonoBehaviour
         tileMapNodes = GenerateTilemapNodes.Instance;
         map = tileMapNodes.nodes;
         tileSize = tileMapNodes.TileSize;
-        PathNode test = GetNode(map[0].position);
-        GeneratePath(map[10], map[24]);
     }
-
 
     public float FindH(PathNode node, PathNode goal)
     {
@@ -76,23 +73,11 @@ public class AStarPathFinding : MonoBehaviour
         List<PathNode> Path = new List<PathNode>();
         while(current != start)
         {
-            GameObject go = new GameObject();
-            LineRenderer lr = go.AddComponent<LineRenderer>();
-            lr.startColor = Color.red;
-            lr.endColor = Color.red;
-            lr.sortingOrder = 1000;
-            lr.startWidth = 0.15f;
-            lr.endWidth = 0.15f;
-
             Path.Add(current);
-            lr.SetPosition(0, current.position);
             current = current.cameFromNode;
-            lr.SetPosition(1, current.position);
         }
         return Path;
     }
-
-
 
     public List<PathNode> GetAdjacent(PathNode currentNode)
     {

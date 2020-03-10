@@ -17,11 +17,19 @@ public class EnemyActor : Actor
         {
             currentMapNode = currentPath[currentPath.Count - 1];
             currentPath.RemoveAt(currentPath.Count - 1);
-
-            //transform.position = currentMapNode.position;
+            rotateOnMove();
         }
     }
 
+    public List<PathNode> CheckPointNodes = new List<PathNode>();
+
+    public CheckPointTag checkPointTag = CheckPointTag.A;
+
+    protected List<PathNode> FindCheckPointNodes()
+    {
+
+        return CheckPointNodes;
+    }
 
 
 }
