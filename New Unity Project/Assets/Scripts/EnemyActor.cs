@@ -16,7 +16,7 @@ public class EnemyActor : Actor
     {
         base.Start();
         FindCheckPointNodes();
-        currentPath = pathFinder.GeneratePath(currentMapNode, checkPointNodes[currentCheckPoint]);
+        currentPath = pathFinder.GeneratePath(currentMapNode, checkPointNodes[currentCheckPoint], tilemapNodes);
     }
 
     protected override void Update()
@@ -38,7 +38,7 @@ public class EnemyActor : Actor
             }
             else
             {
-                currentPath = pathFinder.GeneratePath(currentMapNode, checkPointNodes[currentCheckPoint]);
+                currentPath = pathFinder.GeneratePath(currentMapNode, checkPointNodes[currentCheckPoint], tilemapNodes);
                 if(currentPath.Count != 0)
                 {
                     Move();
@@ -52,7 +52,7 @@ public class EnemyActor : Actor
             {
                 currentCheckPoint = 0;
             }
-            currentPath = pathFinder.GeneratePath(currentMapNode, checkPointNodes[currentCheckPoint]);
+            currentPath = pathFinder.GeneratePath(currentMapNode, checkPointNodes[currentCheckPoint], tilemapNodes);
             if(currentPath.Count != 0)
             {
                 Move();
@@ -65,7 +65,7 @@ public class EnemyActor : Actor
     {
         for(int i = 0; i < checkPointPositons.Count; i++)
         {
-            checkPointNodes.Add(pathFinder.GetNearestNode(checkPointPositons[i]));
+            checkPointNodes.Add(tilemapNodes.GetNearestNode(checkPointPositons[i]));
         }
         return checkPointNodes;
     }

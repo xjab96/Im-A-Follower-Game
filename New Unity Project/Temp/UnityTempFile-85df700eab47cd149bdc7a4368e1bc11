@@ -299,7 +299,7 @@ Assets\Scripts\AICheckPoint.cs
 Assets\Scripts\AStarPathFinding.cs
 Assets\Scripts\EnemyActor.cs
 Assets\Scripts\GameManager.cs
-Assets\Scripts\GenerateTilemapNodes.cs
 Assets\Scripts\PathNode.cs
 Assets\Scripts\PlayerActor.cs
 Assets\Scripts\ProtagonistActor.cs
+Assets\Scripts\TilemapNodes.cs

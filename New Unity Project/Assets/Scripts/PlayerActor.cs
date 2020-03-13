@@ -22,12 +22,12 @@ public class PlayerActor : Actor
     protected override void Start()
     {
         base.Start();
-        currentMapNode = pathFinder.GetNearestNode(new Vector2(-2, 0));
+        currentMapNode = tilemapNodes.GetNearestNode(new Vector2(-2, 0));
         transform.position = currentMapNode.position;
     }
     public bool Move(Vector2 direction)
     {
-        foreach(var i in pathFinder.GetAdjacent(currentMapNode))
+        foreach(var i in tilemapNodes.GetAdjacent(currentMapNode))
         {
             if(currentMapNode.position + direction == i.position)
             {

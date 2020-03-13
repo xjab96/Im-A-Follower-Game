@@ -9,7 +9,10 @@ public class Actor : MonoBehaviour
     protected float speed = 10;
 
     protected PathNode currentMapNode;
+
     protected AStarPathFinding pathFinder;
+
+    protected TilemapNodes tilemapNodes;
 
     [SerializeField]
     protected SpriteRenderer sprite;
@@ -19,8 +22,10 @@ public class Actor : MonoBehaviour
 
     protected virtual void Start()
     {
+        tilemapNodes = TilemapNodes.Instance;
+
         pathFinder = GetComponent<AStarPathFinding>();
-        currentMapNode = pathFinder.GetNearestNode(new Vector2(-3, -4));
+        currentMapNode = tilemapNodes.GetNearestNode(new Vector2(0, 0));
         transform.position = currentMapNode.position;
 
         startMovementTransform = transform;
